@@ -29,7 +29,7 @@ body { margin: 0; color: var(--text); background: var(--night);
 .top { max-width: 40rem; margin: 0 auto; display: flex; align-items: center; gap: .6rem;
   font-weight: 750; letter-spacing: .02em; }
 .top::before { content: ""; width: 1.6rem; height: .3rem; border-radius: 1rem; background: var(--glow); }
-.hero .inner { position: relative; max-width: 40rem; margin: 0 auto; padding-top: max(5rem, 16vh); }
+.hero .inner { position: relative; max-width: 40rem; margin: 0 auto; padding-top: max(2.5rem, 6vh); }
 .hero h1 { margin: 0; font-size: clamp(2.6rem, 13vw, 4.6rem); line-height: 1.02;
   text-shadow: 0 0 24px rgba(255,95,168,.55), 0 2px 0 rgba(0,0,0,.4); }
 .hero h1 span { color: var(--cyan); text-shadow: 0 0 24px rgba(63,216,255,.6), 0 2px 0 rgba(0,0,0,.4); }
@@ -133,6 +133,55 @@ html { background: #0d1a1f; }
   text-shadow: 0 0 16px rgba(184,209,199,.25); font-size: 1.35rem; }
 .quiet .when { background: rgba(165,125,255,.12); border-color: rgba(165,125,255,.5); color: #e2d6ff; }
 .lead-label { margin-top: 2.2rem; }
+/* The glance: both products, how each earns and the tech, in one screen. */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.glance { display: grid; gap: .6rem; margin-top: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.g { display: flex; gap: .8rem; align-items: flex-start; padding: .8rem .9rem;
+  border-radius: 1rem; color: var(--text); text-decoration: none;
+  background: rgba(12,10,24,.66); border: 1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.g:hover { border-color: rgba(255,255,255,.34); }
+.g:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.g img { flex: none; width: 44px; height: 44px; border-radius: 22.5%; }
+.g b { display: block; font-size: 1.15rem; line-height: 1.15; }
+.g .k, .g .p { display: block; font-size: .85rem; line-height: 1.4; }
+.g .k { color: #e4dff7; } .g .p { color: var(--muted); margin-top: .1rem; }
+.g .s { display: inline-block; margin-top: .45rem; padding: .1rem .6rem;
+  border-radius: 1rem; font-size: .75rem; font-weight: 700; }
+.s.soon { color: #bff1ff; background: rgba(63,216,255,.12); border: 1px solid rgba(63,216,255,.45); }
+.s.live { color: #dcefe7; background: rgba(184,209,199,.14); border: 1px solid rgba(184,209,199,.55); }
+.hero .tech { margin: .9rem 0 0; font-size: .9rem; color: #cfc8ea; }
+.hero .tech b, .hood b { color: var(--text); }
+.earns.hood { border-top: 0; padding-top: 0; margin-top: .6rem; }
+/* Store badges: the stores' own artwork, 40 px tall, 8 px apart. */
+.stores { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 1rem 0 0 !important; }
+.stores .badge { line-height: 0; }
+.stores .badge img { display: block; height: 40px; width: auto; }
+.stores .store { display: inline-block; padding: .35rem .85rem; border-radius: 2rem;
+  border: 1px solid rgba(184,209,199,.55); color: #dcefe7; font-weight: 650;
+  font-size: .9rem; text-decoration: none; }
+.stores .store:hover { background: rgba(184,209,199,.12); }
+/* Where to click (Adam 10 Nov): each app's own site from a real button,
+   and the glance boxes go there too. */
+.cta { margin: 1.1rem 0 0 !important; }
+.go { display: inline-flex; align-items: center; gap: .45rem; padding: .6rem 1.15rem;
+  border-radius: 2rem; font-weight: 750; text-decoration: none; color: #14101f;
+  background: var(--glow); box-shadow: 0 0 18px rgba(255,95,168,.35); }
+.go:hover { filter: brightness(1.1); }
+.go:focus-visible, .stores a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.quiet .go { background: #B8D1C7; color: #0d1a1f; box-shadow: 0 0 16px rgba(184,209,199,.25); }
+.g { position: relative; padding-right: 2.4rem; }
+.g .arrow { position: absolute; right: .9rem; top: 50%; transform: translateY(-50%);
+  font-size: 1.25rem; color: var(--muted); }
+.g:hover .arrow { color: var(--text); }
+/* The release line is status, not a button: plain text with a lit dot. */
+.feature .when { display: block; margin-top: .9rem; padding: 0; border: 0; background: none;
+  border-radius: 0; color: #bff1ff; font-weight: 650; }
+.feature .when::before { content: ""; display: inline-block; width: .5rem; height: .5rem;
+  margin-right: .5rem; border-radius: 50%; background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan); vertical-align: .1rem; }
 /* 404: the same night, plain. */
 .lost { max-width: 40rem; margin: 0 auto; padding: 6rem 1rem; }
 .lost h1 { margin: 0 0 1rem; font-size: 2.2rem; }
@@ -145,29 +194,37 @@ html { background: #0d1a1f; }
 <div class="inner">
 <h1 class="display">We make worlds <span>you step into.</span></h1>
 <p>We&#x27;re an independent studio making our own games and apps. Everything here is published under our own name, and immersion comes first.</p>
+<div class="glance">
+<a class="g" href="https://bubblepunks.com/"><img src="img/icon_bubble_punks.webp" alt="" width="192" height="192"><span><b class="display">Bubble Punks</b><span class="k">Party battle game</span><span class="p">In-app purchases · No ads</span><span class="s soon">Coming November 2026</span></span><span class="arrow" aria-hidden="true">→</span></a>
+<a class="g" href="https://apps.immersialabs.com/infinite-reading/"><img src="img/icon_infinite_reading.webp" alt="" width="192" height="192"><span><b class="display">Infinite Reading</b><span class="k">Reading app</span><span class="p">One-time purchase · No ads</span><span class="s live">Available now</span></span><span class="arrow" aria-hidden="true">→</span></a>
+</div>
+<p class="tech"><b>Under the hood:</b> we build our own game server, and it runs on Google Cloud.</p>
 </div>
 </header>
 <main>
 <div class="col">
 <span class="label lead-label">A world you play</span>
-<article class="feature"><div>
+<article id="bubble-punks" class="feature"><div>
 <a class="shot" href="https://bubblepunks.com/" tabindex="-1" aria-hidden="true"><img src="img/feature_bubble_punks.webp" alt="" width="1024" height="500"></a>
 <div class="body">
 <div class="name"><img src="img/icon_bubble_punks.webp" alt="" width="192" height="192"><div><h3 class="display"><a href="https://bubblepunks.com/">Bubble Punks</a></h3><p>For iPhone, iPad and Android</p></div></div>
 <p class="tagline display">When the shutters come down, the Punks come out.</p>
 <p>A pocket-sized party battle from Drip City. Trap your rivals in bubbles, pop them, and be the last crew standing. Party up online, play Wi-Fi games in the same room, or practice against computer players.</p>
+<p class="cta"><a class="go" href="https://bubblepunks.com/">Visit bubblepunks.com <span aria-hidden="true">→</span></a></p>
 <span class="when">Coming to the App Store and Google Play in November 2026</span>
-<p class="earns"><b>How it earns:</b> the game costs nothing to download. Players can buy Glowdrops in the game and spend them on Punks, looks and the season pass. Gum, which players earn by playing, is never sold. No ads.</p>
+<p class="earns"><b>How it earns:</b> costs nothing to download, with in-app purchases. Players buy Glowdrops and spend them on Punks, looks and the season pass. Gum, which players earn by playing, is never sold. No ads.</p>
 </div></div></article>
 </div>
 <div class="drift" aria-hidden="true"><i class="b d1"></i><i class="b d2"></i><i class="b d3"></i></div>
-<section class="world" aria-label="Infinite Reading"><div class="mist"></div><span class="label">A world you read</span></section>
+<section class="world" id="infinite-reading" aria-label="Infinite Reading"><div class="mist"></div><span class="label">A world you read</span></section>
 <div class="tail"><div class="read">
 <article class="feature quiet"><div>
 <div class="body">
 <div class="name"><img src="img/icon_infinite_reading.webp" alt="" width="192" height="192"><div><h3><a href="https://apps.immersialabs.com/infinite-reading/">Infinite Reading</a></h3><p>On iPhone, iPad and Android</p></div></div>
 <p class="tagline">Let the story set the scene.</p>
 <p>As you read, the scene behind the page follows the story, with soft ambient sound. Bring your own DRM-free EPUB and PDF books.</p>
+<p class="cta"><a class="go" href="https://apps.immersialabs.com/infinite-reading/">Visit the Infinite Reading page <span aria-hidden="true">→</span></a></p>
+<p class="stores"><a class="store" href="https://apps.apple.com/app/id6826034331">App Store</a><a class="store" href="https://play.google.com/store/apps/details?id=com.immersialabs.infinitereading">Google Play</a></p>
 <p class="earns"><b>How it earns:</b> one-time purchase. No ads, no account.</p>
 </div></div></article>
 </div>
@@ -179,7 +236,7 @@ html { background: #0d1a1f; }
 <li><b class="display">Independent.</b> Self-funded, and making what we&#x27;d want to play and read ourselves.</li>
 </ul>
 <p class="help">Help: <a href="mailto:support@immersialabs.com">support@immersialabs.com</a></p>
-<footer>© 2026 Immersia Labs LLC</footer>
+<footer>© 2026 Immersia Labs LLC<br><small>App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.</small></footer>
 </div>
 </div>
 </main>

@@ -29,7 +29,7 @@ body { margin: 0; color: var(--text); background: var(--night);
 .top { max-width: 40rem; margin: 0 auto; display: flex; align-items: center; gap: .6rem;
   font-weight: 750; letter-spacing: .02em; }
 .top::before { content: ""; width: 1.6rem; height: .3rem; border-radius: 1rem; background: var(--glow); }
-.hero .inner { position: relative; max-width: 40rem; margin: 0 auto; padding-top: max(5rem, 16vh); }
+.hero .inner { position: relative; max-width: 40rem; margin: 0 auto; padding-top: max(2.5rem, 6vh); }
 .hero h1 { margin: 0; font-size: clamp(2.6rem, 13vw, 4.6rem); line-height: 1.02;
   text-shadow: 0 0 24px rgba(255,95,168,.55), 0 2px 0 rgba(0,0,0,.4); }
 .hero h1 span { color: var(--cyan); text-shadow: 0 0 24px rgba(63,216,255,.6), 0 2px 0 rgba(0,0,0,.4); }
@@ -133,6 +133,55 @@ html { background: #0d1a1f; }
   text-shadow: 0 0 16px rgba(184,209,199,.25); font-size: 1.35rem; }
 .quiet .when { background: rgba(165,125,255,.12); border-color: rgba(165,125,255,.5); color: #e2d6ff; }
 .lead-label { margin-top: 2.2rem; }
+/* The glance: both products, how each earns and the tech, in one screen. */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.glance { display: grid; gap: .6rem; margin-top: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.g { display: flex; gap: .8rem; align-items: flex-start; padding: .8rem .9rem;
+  border-radius: 1rem; color: var(--text); text-decoration: none;
+  background: rgba(12,10,24,.66); border: 1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.g:hover { border-color: rgba(255,255,255,.34); }
+.g:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.g img { flex: none; width: 44px; height: 44px; border-radius: 22.5%; }
+.g b { display: block; font-size: 1.15rem; line-height: 1.15; }
+.g .k, .g .p { display: block; font-size: .85rem; line-height: 1.4; }
+.g .k { color: #e4dff7; } .g .p { color: var(--muted); margin-top: .1rem; }
+.g .s { display: inline-block; margin-top: .45rem; padding: .1rem .6rem;
+  border-radius: 1rem; font-size: .75rem; font-weight: 700; }
+.s.soon { color: #bff1ff; background: rgba(63,216,255,.12); border: 1px solid rgba(63,216,255,.45); }
+.s.live { color: #dcefe7; background: rgba(184,209,199,.14); border: 1px solid rgba(184,209,199,.55); }
+.hero .tech { margin: .9rem 0 0; font-size: .9rem; color: #cfc8ea; }
+.hero .tech b, .hood b { color: var(--text); }
+.earns.hood { border-top: 0; padding-top: 0; margin-top: .6rem; }
+/* Store badges: the stores' own artwork, 40 px tall, 8 px apart. */
+.stores { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 1rem 0 0 !important; }
+.stores .badge { line-height: 0; }
+.stores .badge img { display: block; height: 40px; width: auto; }
+.stores .store { display: inline-block; padding: .35rem .85rem; border-radius: 2rem;
+  border: 1px solid rgba(184,209,199,.55); color: #dcefe7; font-weight: 650;
+  font-size: .9rem; text-decoration: none; }
+.stores .store:hover { background: rgba(184,209,199,.12); }
+/* Where to click (Adam 10 Nov): each app's own site from a real button,
+   and the glance boxes go there too. */
+.cta { margin: 1.1rem 0 0 !important; }
+.go { display: inline-flex; align-items: center; gap: .45rem; padding: .6rem 1.15rem;
+  border-radius: 2rem; font-weight: 750; text-decoration: none; color: #14101f;
+  background: var(--glow); box-shadow: 0 0 18px rgba(255,95,168,.35); }
+.go:hover { filter: brightness(1.1); }
+.go:focus-visible, .stores a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.quiet .go { background: #B8D1C7; color: #0d1a1f; box-shadow: 0 0 16px rgba(184,209,199,.25); }
+.g { position: relative; padding-right: 2.4rem; }
+.g .arrow { position: absolute; right: .9rem; top: 50%; transform: translateY(-50%);
+  font-size: 1.25rem; color: var(--muted); }
+.g:hover .arrow { color: var(--text); }
+/* The release line is status, not a button: plain text with a lit dot. */
+.feature .when { display: block; margin-top: .9rem; padding: 0; border: 0; background: none;
+  border-radius: 0; color: #bff1ff; font-weight: 650; }
+.feature .when::before { content: ""; display: inline-block; width: .5rem; height: .5rem;
+  margin-right: .5rem; border-radius: 50%; background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan); vertical-align: .1rem; }
 /* 404: the same night, plain. */
 .lost { max-width: 40rem; margin: 0 auto; padding: 6rem 1rem; }
 .lost h1 { margin: 0 0 1rem; font-size: 2.2rem; }
