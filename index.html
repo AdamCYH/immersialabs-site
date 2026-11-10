@@ -39,22 +39,52 @@ h2 { margin: 3rem 0 0.8rem; color: var(--muted); font-size: 0.8rem;
   font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; }
 ul.apps { list-style: none; margin: 0; padding: 0; display: grid;
   gap: 0.75rem; }
-ul.apps li { position: relative; display: flex; align-items: center;
+ul.apps li { position: relative; display: flex; align-items: flex-start;
   gap: 1rem; padding: 0.9rem 1rem 0.9rem 0.9rem; background: var(--card);
   border: 1px solid var(--line); border-radius: 1.1rem;
   box-shadow: var(--shadow); color: var(--muted); }
 /* Icons in px: bigger text never makes them huge. */
-ul.apps img { flex: none; width: 56px; height: 56px;
+ul.apps img { flex: none; width: 56px; height: 56px; margin-top: 0.1rem;
   border-radius: 22.5%; outline: 1px solid rgba(0,0,0,.06);
   outline-offset: -1px; }
 ul.apps a { color: var(--text); font-weight: 650; text-decoration: none; }
 /* The whole card is the link's tap area. */
+ul.apps .for { display: block; margin-top: 0.15rem; font-size: 0.9rem; }
 ul.apps a::after { content: ""; position: absolute; inset: 0;
   border-radius: inherit; }
 ul.apps li:hover { border-color: var(--muted); }
 ul.apps a:focus-visible { outline: none; }
 ul.apps li:has(a:focus-visible) { outline: 2px solid var(--link);
   outline-offset: 2px; }
+main > p.sub { margin: 0.6rem 0 0; color: var(--muted); }
+/* The game: one big card. Not one big link, unlike the small cards: it
+   holds lines people may select. The picture and the name are the links;
+   the picture's is hidden from screen readers, so it isn't read twice. */
+.feature { background: var(--card); border: 1px solid var(--line);
+  border-radius: 1.1rem; box-shadow: var(--shadow); overflow: hidden; }
+.feature .shot { display: block; line-height: 0; }
+.feature .shot img { display: block; width: 100%; height: auto;
+  aspect-ratio: 1024 / 500; }
+.feature .body { padding: 1rem 1.1rem 1.15rem; }
+.feature .name { display: flex; align-items: center; gap: 0.85rem; }
+.feature .name img { flex: none; width: 64px; height: 64px;
+  border-radius: 22.5%; outline: 1px solid rgba(0,0,0,.06);
+  outline-offset: -1px; }
+.feature h3 { margin: 0; font-size: 1.35rem; line-height: 1.2;
+  font-weight: 750; letter-spacing: -0.01em; }
+.feature h3 a { color: var(--text); text-decoration: none; }
+.feature h3 a:hover { text-decoration: underline; }
+.feature .for { margin: 0.1rem 0 0; color: var(--muted); font-size: 0.9rem; }
+.feature .body > p { margin: 0.85rem 0 0; }
+.feature .when { display: inline-block; margin-top: 0.95rem;
+  padding: 0.3rem 0.75rem; border: 1px solid var(--line);
+  border-radius: 0.75rem; background: var(--bg); font-size: 0.9rem;
+  font-weight: 600; }
+.feature .earns { margin-top: 1.1rem; padding-top: 0.9rem;
+  border-top: 1px solid var(--line); }
+.feature h4 { margin: 0 0 0.3rem; color: var(--muted); font-size: 0.75rem;
+  font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; }
+.feature .earns p { margin: 0; color: var(--muted); }
 .help { margin: 2.25rem 0 0; color: var(--muted); }
 footer { margin-top: auto; padding-top: 3rem; color: var(--muted);
   font-size: 0.85rem; }
@@ -63,11 +93,22 @@ footer { margin-top: auto; padding-top: 3rem; color: var(--muted);
 <body>
 <main>
 <h1>Immersia Labs LLC</h1>
-<p>We make apps and games.</p>
+<p>We build and publish our own games and apps.</p>
+<p class="sub">Immersion comes first: each one should feel like a world you step into. Bubble Punks leads the way.</p>
+<h2>Games</h2>
+<article class="feature">
+<a class="shot" href="https://bubblepunks.com/" tabindex="-1" aria-hidden="true"><img src="img/feature_bubble_punks.webp" alt="" width="1024" height="500"></a>
+<div class="body">
+<div class="name"><img src="img/icon_bubble_punks.webp" alt="" width="192" height="192"><div><h3><a href="https://bubblepunks.com/">Bubble Punks</a></h3><p class="for">For iPhone, iPad and Android</p></div></div>
+<p>Bubble Punks is a pocket-sized party battle game. Trap your rivals in bubbles, pop them, and be the last crew standing.</p>
+<p>Play online in quick matches or private rooms, with friends over Wi-Fi, or practice against computer players.</p>
+<span class="when">Coming to the App Store and Google Play in November 2026</span>
+<div class="earns"><h4>How it earns</h4><p>The game costs nothing to download. Players can buy Glowdrops in the game and spend them on Punks, looks and the season pass. Gum, which players earn by playing, is never sold. No ads.</p></div>
+</div>
+</article>
 <h2>Apps</h2>
 <ul class="apps">
-<li><img src="img/icon_infinite_reading.webp" alt="" width="192" height="192"><span><a href="https://apps.immersialabs.com/infinite-reading/">Infinite Reading</a>: a quiet place to read your own books</span></li>
-<li><img src="img/icon_bubble_punks.webp" alt="" width="192" height="192"><span><a href="https://bubblepunks.com/">Bubble Punks</a>: coming soon</span></li>
+<li><img src="img/icon_infinite_reading.webp" alt="" width="192" height="192"><span><a href="https://apps.immersialabs.com/infinite-reading/">Infinite Reading</a>: Let the story set the scene. As you read, the scene behind the page follows the story, with soft ambient sound.<span class="for">For iPhone, iPad and Android. One-time purchase. No ads, no account.</span></span></li>
 </ul>
 <p class="help">Help: <a href="mailto:support@immersialabs.com">support@immersialabs.com</a></p>
 <footer>© 2026 Immersia Labs LLC</footer>
