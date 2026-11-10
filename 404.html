@@ -3,97 +3,145 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; font-src 'self'">
 <meta name="referrer" content="no-referrer">
 <title>Page not found</title>
 <style>
-/* immersialabs.com only. A calm studio page: light by default, dark with the
-   phone; the one accent is the cyan-pink-violet glow both app icons share. */
-:root { color-scheme: light dark;
-  --bg: #f5f5f8; --card: #ffffff; --text: #18181d; --muted: #5b5b66;
-  --line: #e2e2e9; --link: #2456c9; --shadow: 0 1px 2px rgba(20,20,40,.05),
-  0 6px 20px rgba(20,20,40,.06);
-  --glow: linear-gradient(90deg, #3fd8ff, #ff5fa8 55%, #a57dff); }
-@media (prefers-color-scheme: dark) { :root {
-  --bg: #0f0f14; --card: #18181f; --text: #ececf2; --muted: #a2a2ae;
-  --line: #2a2a34; --link: #8db1ff; --shadow: none; } }
-html { background: var(--bg); font-size: 106.25%; }
-/* Safari: follow the phone's text size setting (Dynamic Type). */
+/* immersialabs.com, second pass (the Designer's look A, "two worlds";
+   Adam's go 10 Nov; reference page art/site/company_page_v2.html):
+   Drip City at night, then Infinite Reading's book world, one night
+   sky. Dark only on purpose. Motion is CSS only and stops with
+   prefers-reduced-motion. */
+@font-face { font-family: "Lilita One"; src: url(fonts/LilitaOne-Regular.ttf); font-display: swap; }
+:root { color-scheme: dark; --night: #0c0a18; --card: #16132a; --text: #f1eefc;
+  --muted: #b3acd0; --line: #2c2747; --cyan: #3fd8ff; --pink: #ff5fa8; --violet: #a57dff;
+  --glow: linear-gradient(90deg, var(--cyan), var(--pink) 55%, var(--violet)); }
+html { background: var(--night); font-size: 106.25%; }
 @supports (font: -apple-system-body) { html { font: -apple-system-body; } }
-body { margin: 0; min-height: 100vh; min-height: 100svh; color: var(--text);
-  background: var(--bg);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif; font-size: 1rem; line-height: 1.5; }
-main { box-sizing: border-box; max-width: 34rem; margin: 0 auto;
-  min-height: 100vh; min-height: 100svh; padding: max(3rem, 13vh) 1rem 2rem;
-  display: flex; flex-direction: column; }
-a { color: var(--link); text-underline-offset: 0.18em; }
-h1 { margin: 0; font-size: clamp(1.75rem, 8.6vw, 2.75rem); line-height: 1.1;
-  font-weight: 750; letter-spacing: -0.025em; }
-/* The glow line over the name. */
-h1::before { content: ""; display: block; width: 3.25rem; height: 0.3rem;
-  margin-bottom: 1.4rem; border-radius: 1rem; background: var(--glow); }
-main > p:first-of-type { margin: 0.7rem 0 0; color: var(--muted);
-  font-size: 1.2rem; }
-h2 { margin: 3rem 0 0.8rem; color: var(--muted); font-size: 0.8rem;
-  font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; }
-ul.apps { list-style: none; margin: 0; padding: 0; display: grid;
-  gap: 0.75rem; }
-ul.apps li { position: relative; display: flex; align-items: flex-start;
-  gap: 1rem; padding: 0.9rem 1rem 0.9rem 0.9rem; background: var(--card);
-  border: 1px solid var(--line); border-radius: 1.1rem;
-  box-shadow: var(--shadow); color: var(--muted); }
-/* Icons in px: bigger text never makes them huge. */
-ul.apps img { flex: none; width: 56px; height: 56px; margin-top: 0.1rem;
-  border-radius: 22.5%; outline: 1px solid rgba(0,0,0,.06);
-  outline-offset: -1px; }
-ul.apps a { color: var(--text); font-weight: 650; text-decoration: none; }
-/* The whole card is the link's tap area. */
-ul.apps .for { display: block; margin-top: 0.15rem; font-size: 0.9rem; }
-ul.apps a::after { content: ""; position: absolute; inset: 0;
-  border-radius: inherit; }
-ul.apps li:hover { border-color: var(--muted); }
-ul.apps a:focus-visible { outline: none; }
-ul.apps li:has(a:focus-visible) { outline: 2px solid var(--link);
-  outline-offset: 2px; }
-main > p.sub { margin: 0.6rem 0 0; color: var(--muted); }
-/* The game: one big card. Not one big link, unlike the small cards: it
-   holds lines people may select. The picture and the name are the links;
-   the picture's is hidden from screen readers, so it isn't read twice. */
-.feature { background: var(--card); border: 1px solid var(--line);
-  border-radius: 1.1rem; box-shadow: var(--shadow); overflow: hidden; }
+body { margin: 0; color: var(--text); background: var(--night);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5; overflow-x: hidden; }
+.display { font-family: "Lilita One", "Arial Rounded MT Bold", sans-serif; font-weight: 400; letter-spacing: 0.01em; }
+/* The hero: Drip City from above, fading into the night. */
+.hero { position: relative; overflow: hidden; padding: 1.2rem 1rem 3.2rem;
+  background: linear-gradient(180deg, rgba(12,10,24,.35) 0%, rgba(12,10,24,.55) 55%, var(--night) 100%),
+    url(img/drip_city_night.webp) 46% 18% / cover no-repeat; }
+.top { max-width: 40rem; margin: 0 auto; display: flex; align-items: center; gap: .6rem;
+  font-weight: 750; letter-spacing: .02em; }
+.top::before { content: ""; width: 1.6rem; height: .3rem; border-radius: 1rem; background: var(--glow); }
+.hero .inner { position: relative; max-width: 40rem; margin: 0 auto; padding-top: max(5rem, 16vh); }
+.hero h1 { margin: 0; font-size: clamp(2.6rem, 13vw, 4.6rem); line-height: 1.02;
+  text-shadow: 0 0 24px rgba(255,95,168,.55), 0 2px 0 rgba(0,0,0,.4); }
+.hero h1 span { color: var(--cyan); text-shadow: 0 0 24px rgba(63,216,255,.6), 0 2px 0 rgba(0,0,0,.4); }
+.hero p { margin: 1rem 0 0; max-width: 30rem; font-size: 1.1rem; color: #e4dff7; }
+/* A few gum bubbles drifting up; still for reduced motion. */
+.b { position: absolute; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 32% 28%, rgba(255,255,255,.75) 0 9%, rgba(255,255,255,0) 10%),
+    radial-gradient(circle, rgba(255,95,168,.10) 55%, rgba(255,140,200,.55) 100%);
+  border: 1.5px solid rgba(255,190,225,.7); animation: rise 9s ease-in-out infinite alternate; }
+.b1 { width: 64px; height: 64px; right: 8%; top: 22%; }
+.b2 { width: 30px; height: 30px; right: 26%; top: 12%; animation-delay: -3s;
+  background: radial-gradient(circle at 32% 28%, rgba(255,255,255,.75) 0 9%, rgba(255,255,255,0) 10%), radial-gradient(circle, rgba(63,216,255,.1) 55%, rgba(63,216,255,.55) 100%);
+  border-color: rgba(160,235,255,.7); }
+.b3 { width: 44px; height: 44px; left: 10%; top: 30%; animation-delay: -6s; }
+@keyframes rise { from { transform: translateY(8px); } to { transform: translateY(-14px); } }
+@media (prefers-reduced-motion: reduce) { .b { animation: none; } }
+.col { max-width: 40rem; margin: 0 auto; padding: 0 1rem 2rem; }
+h2 { margin: 2.6rem 0 .9rem; font-size: 1.5rem; }
+h2 small { display: block; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: .75rem;
+  font-weight: 650; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .2rem; }
+/* Bubble Punks: the glowing card. */
+.feature { position: relative; border-radius: 1.3rem; padding: 2px; background: var(--glow);
+  box-shadow: 0 0 40px rgba(255,95,168,.25), 0 0 80px rgba(63,216,255,.12); }
+.feature > div { border-radius: calc(1.3rem - 2px); background: var(--card); overflow: hidden; }
 .feature .shot { display: block; line-height: 0; }
-.feature .shot img { display: block; width: 100%; height: auto;
-  aspect-ratio: 1024 / 500; }
-.feature .body { padding: 1rem 1.1rem 1.15rem; }
-.feature .name { display: flex; align-items: center; gap: 0.85rem; }
-.feature .name img { flex: none; width: 64px; height: 64px;
-  border-radius: 22.5%; outline: 1px solid rgba(0,0,0,.06);
-  outline-offset: -1px; }
-.feature h3 { margin: 0; font-size: 1.35rem; line-height: 1.2;
-  font-weight: 750; letter-spacing: -0.01em; }
-.feature h3 a { color: var(--text); text-decoration: none; }
-.feature h3 a:hover { text-decoration: underline; }
-.feature .for { margin: 0.1rem 0 0; color: var(--muted); font-size: 0.9rem; }
-.feature .body > p { margin: 0.85rem 0 0; }
-.feature .when { display: inline-block; margin-top: 0.95rem;
-  padding: 0.3rem 0.75rem; border: 1px solid var(--line);
-  border-radius: 0.75rem; background: var(--bg); font-size: 0.9rem;
-  font-weight: 600; }
-.feature .earns { margin-top: 1.1rem; padding-top: 0.9rem;
-  border-top: 1px solid var(--line); }
-.feature h4 { margin: 0 0 0.3rem; color: var(--muted); font-size: 0.75rem;
-  font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; }
-.feature .earns p { margin: 0; color: var(--muted); }
-.help { margin: 2.25rem 0 0; color: var(--muted); }
-footer { margin-top: auto; padding-top: 3rem; color: var(--muted);
-  font-size: 0.85rem; }
+.feature .shot img { width: 100%; height: auto; aspect-ratio: 1024/500; display: block; }
+.feature .body { padding: 1.1rem 1.15rem 1.25rem; }
+.name { display: flex; align-items: center; gap: .9rem; }
+.name img { width: 64px; height: 64px; border-radius: 22.5%; flex: none; }
+.name h3 { margin: 0; font-size: 1.75rem; line-height: 1.05; }
+.name h3 a { color: var(--text); text-decoration: none; }
+.name p { margin: .15rem 0 0; color: var(--muted); font-size: .9rem; }
+.body > p { margin: .9rem 0 0; }
+.when { display: inline-block; margin-top: 1rem; padding: .35rem .85rem; border-radius: 2rem;
+  background: rgba(63,216,255,.12); border: 1px solid rgba(63,216,255,.45); color: #bff1ff;
+  font-size: .9rem; font-weight: 650; }
+.earns { margin: 1.2rem 0 0; padding: 0; list-style: none; display: grid; gap: .5rem;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); }
+.earns li { padding: .7rem .8rem; border-radius: .9rem; background: rgba(255,255,255,.04);
+  border: 1px solid var(--line); font-size: .92rem; color: var(--muted); }
+.earns b { display: block; color: var(--text); font-size: 1rem; }
+.small { display: flex; align-items: center; gap: 1rem; padding: .9rem 1rem .9rem .9rem;
+  border-radius: 1.1rem; background: var(--card); border: 1px solid var(--line); color: var(--muted); }
+.small img { width: 56px; height: 56px; border-radius: 22.5%; flex: none; }
+.small a { color: var(--text); font-weight: 650; text-decoration: none; }
+.help { margin: 2.4rem 0 0; color: var(--muted); }
+a { color: #8fdcff; }
+footer { padding-top: 2.5rem; color: var(--muted); font-size: .85rem; }
+
+.gap { height: .75rem; }
+.tagline { margin: 1rem 0 0 !important; font-size: 1.3rem; line-height: 1.15; }
+.earns { display: block; margin: 1.1rem 0 0; padding: .9rem 0 0; font-size: .95rem; }
+.beats { margin: 0; padding: 0; list-style: none; display: grid; gap: .75rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); }
+.beats li { padding: 1rem 1rem 1.05rem; border-radius: 1.1rem; font-size: .95rem; }
+.beats b { display: block; font-size: 1.3rem; margin-bottom: .25rem; }
+.next { margin: 2rem 0 0; }
+
+.hero h1 { text-wrap: balance; font-size: clamp(2.7rem, 13.5vw, 4.6rem); line-height: 1.06; max-width: 15ch; }
+.tagline { color: var(--pink); text-shadow: 0 0 18px rgba(255,95,168,.45); }
+.earns { border-top: 1px solid var(--line); color: var(--muted); }
+.earns b { color: var(--text); }
+.beats li { background: var(--card); border: 1px solid var(--line); color: var(--muted); position: relative; overflow: hidden; }
+.beats li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--glow); }
+.beats b { color: var(--text); }
+.next { padding: .7rem .95rem; border-radius: .9rem; border: 1px dashed rgba(255,95,168,.6); color: #ffd0e6; background: rgba(255,95,168,.07); }
+
+/* v3: one night from Drip City to the moon over the book. */
+body { background: #0c0a18; }
+.drift { background: linear-gradient(180deg, #0c0a18, #0d1a1f); max-width: none; }
+.tail { background: #0d1a1f; }
+html { background: #0d1a1f; }
+.label { display: block; margin: 2.6rem 0 .8rem; font: 650 .75rem/1.2 -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.label::before { content: ""; display: inline-block; width: 1.2rem; height: 2px; margin: 0 .5rem .22rem 0;
+  border-radius: 1rem; background: var(--glow); vertical-align: middle; }
+/* Bubbles sink into the book's mist. */
+.drift { position: relative; height: 7rem; margin: 0; }
+.drift .b { animation: sink 11s ease-in-out infinite alternate; }
+.d1 { width: 34px; height: 34px; left: 22%; top: 10%; }
+.d2 { width: 22px; height: 22px; left: 62%; top: 35%; animation-delay: -4s !important; }
+.d3 { width: 46px; height: 46px; left: 80%; top: 0; animation-delay: -7s !important; opacity: .8; }
+@keyframes sink { from { transform: translateY(-6px); opacity: .95; } to { transform: translateY(26px); opacity: .45; } }
+@media (prefers-reduced-motion: reduce) { .drift .b, .mist { animation: none !important; } }
+.world { position: relative; width: 100%; height: clamp(24rem, 50vw, 38rem); background: #0d1a1f url(img/ir_open_book.webp) 50% 30% / cover no-repeat; }
+.world::before { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, #0d1a1f 0%, rgba(13,26,31,.15) 30%, rgba(13,26,31,0) 60%, #0d1a1f 100%); }
+.mist { position: absolute; inset: 0; pointer-events: none; opacity: .55;
+  background: radial-gradient(40% 30% at 30% 20%, rgba(220,230,255,.35), transparent 70%),
+    radial-gradient(35% 25% at 75% 12%, rgba(255,200,235,.22), transparent 70%);
+  animation: mist 16s ease-in-out infinite alternate; }
+@keyframes mist { from { transform: translateX(-3%); } to { transform: translateX(3%); } }
+.world .label { position: absolute; top: 1.2rem; left: max(1rem, calc(50% - 19rem)); margin: 0; color: #cdd6f4; }
+.read { position: relative; padding: 0 1rem; margin-top: -2rem; }
+.read > * { max-width: 38rem; margin: 0 auto; }
+/* The house glow: both cards share the cyan-magenta edge. */
+.feature.quiet { box-shadow: 0 0 36px rgba(63,216,255,.16); }
+.feature.quiet > div { background: #13262b; }
+.quiet .name h3 { font-family: ui-serif, "New York", Georgia, serif; font-weight: 600; letter-spacing: 0; font-size: 1.6rem; }
+.quiet .tagline { font-family: ui-serif, "New York", Georgia, serif; font-style: italic; color: #B8D1C7;
+  text-shadow: 0 0 16px rgba(184,209,199,.25); font-size: 1.35rem; }
+.quiet .when { background: rgba(165,125,255,.12); border-color: rgba(165,125,255,.5); color: #e2d6ff; }
+.lead-label { margin-top: 2.2rem; }
+/* 404: the same night, plain. */
+.lost { max-width: 40rem; margin: 0 auto; padding: 6rem 1rem; }
+.lost h1 { margin: 0 0 1rem; font-size: 2.2rem; }
 </style>
 </head>
 <body>
-<main>
-<h1>Page not found</h1>
+<div class="lost">
+<h1 class="display">Page not found</h1>
 <p><a href="/">Immersia Labs LLC</a></p>
-</main>
+</div>
 </body>
 </html>
