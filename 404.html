@@ -152,15 +152,27 @@ html { scroll-behavior: smooth; }
   border-radius: 1rem; font-size: .75rem; font-weight: 700; }
 .s.soon { color: #bff1ff; background: rgba(63,216,255,.12); border: 1px solid rgba(63,216,255,.45); }
 .s.live { color: #dcefe7; background: rgba(184,209,199,.14); border: 1px solid rgba(184,209,199,.55); }
-/* Under the hood: each app's line in a column under its glance box (the
-   same grid), stacked on phones. Calm: the size of "How it earns". */
-.hero .tech { margin: .9rem 0 0; font-size: .9rem; line-height: 1.5; color: #cfc8ea; }
-.tech .th { display: block; margin-bottom: .25rem; }
-.tech .tl { display: grid; gap: .35rem .6rem;
+/* Under the hood (Adam, 10 Nov: designed, and not up top). A chip: the
+   glance's status pill, in the app's own colour. */
+.chip { display: inline-block; padding: .1rem .6rem; border-radius: 1rem; font-size: .75rem;
+  font-weight: 700; white-space: nowrap; color: #bff1ff; background: rgba(63,216,255,.12);
+  border: 1px solid rgba(63,216,255,.45); }
+.quiet .chip { color: #dcefe7; background: rgba(184,209,199,.14); border-color: rgba(184,209,199,.55); }
+/* Its own section after both apps, a tile per app like the beats. */
+.hero .jump { margin: .8rem 0 0; font-size: .85rem; }
+.hero .jump a { color: #cfc8ea; text-decoration: none; border-bottom: 1px solid rgba(207,200,234,.35); }
+.hood-band { margin: 0; padding: 0; list-style: none; display: grid; gap: .75rem;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
-.tech .tl p { margin: 0; }
-.hero .tech b, .hood b { color: var(--text); }
-.earns.hood { border-top: 0; padding-top: 0; margin-top: .6rem; }
+.hood-band li { position: relative; overflow: hidden; padding: 1rem 1rem 1.05rem; border-radius: 1.1rem;
+  background: var(--card); border: 1px solid var(--line); color: var(--muted); font-size: .95rem; }
+.hood-band li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--glow); }
+.hood-band li.quiet::before { background: #b8d1c7; }
+.hood-band .who { display: flex; align-items: center; gap: .6rem; margin-bottom: .6rem; }
+.hood-band .who img { width: 32px; height: 32px; border-radius: 22.5%; flex: none; }
+.hood-band .who b { color: var(--text); font-size: 1.15rem; line-height: 1.1; }
+.hood-band .chip { margin-left: auto; }
+.hood-band p { margin: 0; }
+
 /* Store badges: the stores' own artwork, 40 px tall, 8 px apart. */
 .stores { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 1rem 0 0 !important; }
 .stores .badge { line-height: 0; }
