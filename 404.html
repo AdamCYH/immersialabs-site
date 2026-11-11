@@ -152,7 +152,13 @@ html { scroll-behavior: smooth; }
   border-radius: 1rem; font-size: .75rem; font-weight: 700; }
 .s.soon { color: #bff1ff; background: rgba(63,216,255,.12); border: 1px solid rgba(63,216,255,.45); }
 .s.live { color: #dcefe7; background: rgba(184,209,199,.14); border: 1px solid rgba(184,209,199,.55); }
-.hero .tech { margin: .9rem 0 0; font-size: .9rem; color: #cfc8ea; }
+/* Under the hood: each app's line in a column under its glance box (the
+   same grid), stacked on phones. Calm: the size of "How it earns". */
+.hero .tech { margin: .9rem 0 0; font-size: .9rem; line-height: 1.5; color: #cfc8ea; }
+.tech .th { display: block; margin-bottom: .25rem; }
+.tech .tl { display: grid; gap: .35rem .6rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.tech .tl p { margin: 0; }
 .hero .tech b, .hood b { color: var(--text); }
 .earns.hood { border-top: 0; padding-top: 0; margin-top: .6rem; }
 /* Store badges: the stores' own artwork, 40 px tall, 8 px apart. */

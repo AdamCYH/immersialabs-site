@@ -152,7 +152,13 @@ html { scroll-behavior: smooth; }
   border-radius: 1rem; font-size: .75rem; font-weight: 700; }
 .s.soon { color: #bff1ff; background: rgba(63,216,255,.12); border: 1px solid rgba(63,216,255,.45); }
 .s.live { color: #dcefe7; background: rgba(184,209,199,.14); border: 1px solid rgba(184,209,199,.55); }
-.hero .tech { margin: .9rem 0 0; font-size: .9rem; color: #cfc8ea; }
+/* Under the hood: each app's line in a column under its glance box (the
+   same grid), stacked on phones. Calm: the size of "How it earns". */
+.hero .tech { margin: .9rem 0 0; font-size: .9rem; line-height: 1.5; color: #cfc8ea; }
+.tech .th { display: block; margin-bottom: .25rem; }
+.tech .tl { display: grid; gap: .35rem .6rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.tech .tl p { margin: 0; }
 .hero .tech b, .hood b { color: var(--text); }
 .earns.hood { border-top: 0; padding-top: 0; margin-top: .6rem; }
 /* Store badges: the stores' own artwork, 40 px tall, 8 px apart. */
@@ -198,7 +204,7 @@ html { scroll-behavior: smooth; }
 <a class="g" href="https://bubblepunks.com/"><img src="img/icon_bubble_punks.webp" alt="" width="192" height="192"><span><b class="display">Bubble Punks</b><span class="k">Party battle game</span><span class="p">In-app purchases · No ads</span><span class="s soon">Coming November 2026</span></span><span class="arrow" aria-hidden="true">→</span></a>
 <a class="g" href="https://apps.immersialabs.com/infinite-reading/"><img src="img/icon_infinite_reading.webp" alt="" width="192" height="192"><span><b class="display">Infinite Reading</b><span class="k">Reading app</span><span class="p">One-time purchase · No ads</span><span class="s live">Available now</span></span><span class="arrow" aria-hidden="true">→</span></a>
 </div>
-<p class="tech"><b>Under the hood:</b> we build our own game server, and it runs on Google Cloud.</p>
+<div class="tech"><b class="th">Under the hood</b><div class="tl"><p><b>Bubble Punks:</b> we build our own game server, and it runs on Google Cloud.</p><p><b>Infinite Reading:</b> on-device machine learning. A language model we compressed to fit on a phone reads each page and picks one of nearly 200 scenes to match. Your books are never sent to us.</p></div></div>
 </div>
 </header>
 <main>
