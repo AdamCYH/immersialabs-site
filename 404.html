@@ -186,13 +186,11 @@ html { scroll-behavior: smooth; }
 .cta { margin: 1.1rem 0 0 !important; }
 /* The game's social links under its button (the Designer, 12 Nov). */
 .feature .follow { margin: .6rem 0 0; font-size: .85rem; color: var(--muted); }
-.feature .follow .links { white-space: nowrap; }
-.feature .follow a { color: #cfc8ea; text-decoration: underline;
-  text-decoration-color: rgba(207,200,234,.35); text-decoration-thickness: 1px;
-  text-underline-offset: .2em; border-bottom: 0; display: inline-block;
-  min-width: 1.5rem; padding: .4rem .25rem; margin: -.4rem 0; text-align: center;
-  white-space: nowrap; }
-.feature .follow a:hover { text-decoration-color: #cfc8ea; }
+.feature .follow .icons { display: inline-flex; gap: .1rem; vertical-align: middle;
+  white-space: nowrap; margin-left: .15rem; }
+.feature .follow .icons a { display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; margin: -12px 0; border-radius: 50%; color: #fff; }
+.feature .follow .icons img { display: block; height: 20px; width: auto; }
 .go { display: inline-flex; align-items: center; gap: .45rem; padding: .6rem 1.15rem;
   border-radius: 2rem; font-weight: 750; text-decoration: none; color: #14101f;
   background: var(--glow); box-shadow: 0 0 18px rgba(255,95,168,.35); }
